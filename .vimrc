@@ -45,7 +45,7 @@ highlight StatusLine      ctermbg=Black ctermfg=LightGrey
 " ----------------------------------------------------------------------------
 
 set list listchars=trail:.,tab:>.
-highlight SpecialKey ctermfg=DarkGray ctermbg=Black
+highlight SpecialKey ctermfg=DarkGray ctermbg=Yellow
 
 " ----------------------------------------------------------------------------
 "  Backups

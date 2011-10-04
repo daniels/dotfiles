@@ -56,6 +56,6 @@ nmap <d-9> 9gt
 "  Highlight Trailing Whitespace
 " -----------------------------------------------------------
 "
-highlight SpecialKey    guifg=#222222 guibg=#000000
+highlight SpecialKey    guifg=#222222 guibg=#ffff99
 highlight StatusLineNC  guifg=#444444 guibg=#222222
 highlight StatusLine    guifg=#AAAACC guibg=#222222
