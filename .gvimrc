@@ -3,13 +3,13 @@
 " -----------------------------------------------------------
 "
 winpos 0 0
-colorscheme default
+"colorscheme default
 
 if has("gui_macvim")
   set gfn=Menlo:h11
   set shell=/bin/bash
 elseif has("gui_win32")
-  set gfn=Bitstream\ Vera\ Sans\ Mono:h10
+  set gfn=Consolas:h10
 elseif has("gui_gtk")
   set gfn=Monospace\ 10
   set shell=/bin/bash
@@ -57,5 +57,5 @@ nmap <d-9> 9gt
 " -----------------------------------------------------------
 "
 highlight SpecialKey    guifg=#222222 guibg=#ffff99
-highlight StatusLineNC  guifg=#444444 guibg=#222222
-highlight StatusLine    guifg=#AAAACC guibg=#222222
+highlight StatusLineNC  guifg=#222222 guibg=#AAAACC
+highlight StatusLine    guibg=#FFFFFF guifg=#003366
