@@ -14,6 +14,15 @@ set autoread                          " reload files (no local changes only)
 set tabpagemax=50                     " open 50 tabs max
 set hidden                            " Don't unload files when abandoned
 
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
+
 " ---------------------------------------------------------------------------
 " Colors / Theme
 " ---------------------------------------------------------------------------
@@ -97,7 +106,8 @@ if has("statusline")
   set statusline+=\ 
   set statusline+=%(%m\ %)        " Modified?
   set statusline+=%(%y\ %)        " File type"
-" set statusline+=                " TODO: encoding goes here
+  set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}
+                                  " Current encoding
   set statusline+=%q              " Quickfix List?
   set statusline+=%h              " Help?
   set statusline+=%w              " Preview?
