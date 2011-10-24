@@ -36,8 +36,8 @@ endif
 " ---------------------------------------------------------------------------
 
 highlight Comment         ctermfg=DarkGrey guifg=#444444
-highlight StatusLineNC    ctermfg=Black ctermbg=DarkGrey cterm=bold
-highlight StatusLine      ctermbg=Black ctermfg=LightGrey
+highlight StatusLineNC    ctermfg=LightGrey ctermbg=Black cterm=bold
+highlight StatusLine      ctermfg=White ctermbg=Blue cterm=bold
 
 " ----------------------------------------------------------------------------
 "   Highlight Trailing Whitespace
@@ -86,6 +86,25 @@ set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
 set nohlsearch             " don't highlight searches
 set visualbell             " shut up
+
+" Format of status line:
+" %-0{minwid}.{maxwid}{item}
+if has("statusline")
+  set statusline=%n               " Buffer number
+  set statusline+=\ 
+  set statusline+=%-F             " Path to file
+  set statusline+=\ 
+  set statusline+=%(%m\ %)        " Modified?
+  set statusline+=%(%y\ %)        " File type"
+" set statusline+=                " TODO: encoding goes here
+  set statusline+=%q              " Quickfix List?
+  set statusline+=%h              " Help?
+  set statusline+=%w              " Preview?
+  set statusline+=%r              " Readonly?
+  set statusline+=%=              " --------- (split)
+  set statusline+=%-14.(%l,%c%V%) " Line,Column
+  set statusline+=%P              " Percent of file
+endif
 
 " ----------------------------------------------------------------------------
 " Text Formatting
