@@ -20,6 +20,7 @@ set guioptions=gemc
 set columns=90
 set lines=57
 "set cmdheight=2
+set cursorline
 
 " puts external commands through a pipe instead of a pseudo-tty:
 " set noguipty

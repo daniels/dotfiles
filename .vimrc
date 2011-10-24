@@ -12,6 +12,7 @@ set viminfo='1000,f1,:100,@100,/20
 set modeline                          " make sure modeline support is enabled
 set autoread                          " reload files (no local changes only)
 set tabpagemax=50                     " open 50 tabs max
+set hidden                            " Don't unload files when abandoned
 
 " ---------------------------------------------------------------------------
 " Colors / Theme
@@ -80,7 +81,7 @@ set nostartofline          " don't jump to the start of line when scrolling
 " ----------------------------------------------------------------------------
 
 set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
+set mat=2                  " duration to show matching brace (1/10 sec)
 set incsearch              " do incremental searching
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
