@@ -42,6 +42,12 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " ---------------------------------------------------------------------------
+"  Plugins and load paths
+" ---------------------------------------------------------------------------
+
+call pathogen#infect()
+
+" ---------------------------------------------------------------------------
 "  Highlight
 " ---------------------------------------------------------------------------
 
@@ -106,8 +112,9 @@ if has("statusline")
   set statusline+=\ 
   set statusline+=%(%m\ %)        " Modified?
   set statusline+=%(%y\ %)        " File type"
-  set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}
+  set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}
                                   " Current encoding
+  set statusline+=%([%{&ff}]%)    " New line style (dos/unix)
   set statusline+=%q              " Quickfix List?
   set statusline+=%h              " Help?
   set statusline+=%w              " Preview?
