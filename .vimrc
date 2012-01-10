@@ -6,6 +6,8 @@ set nocompatible                      " essential
 set history=1000                      " lots of command line history
 set cf                                " error files / jumping
 set ffs=unix,dos,mac                  " support these files
+" Initate Pathogen before `filetype plugin indent on`
+call pathogen#infect()
 filetype plugin indent on             " load filetype plugin
 set isk+=_,$,@,%,#,-                  " none word dividers
 set viminfo='1000,f1,:100,@100,/20
@@ -40,12 +42,6 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
-
-" ---------------------------------------------------------------------------
-"  Plugins and load paths
-" ---------------------------------------------------------------------------
-
-call pathogen#infect()
 
 " ---------------------------------------------------------------------------
 "  Highlight
