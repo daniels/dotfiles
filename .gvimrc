@@ -19,6 +19,10 @@ set antialias
 set guioptions=gemc
 set columns=90
 set lines=57
+if &diff
+  " double the width up to a reasonable maximum
+  let &columns = ((&columns*2 > 172)? 172: &columns*2)
+endif
 "set cmdheight=2
 set cursorline
 
