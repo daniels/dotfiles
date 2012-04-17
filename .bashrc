@@ -162,7 +162,7 @@ if [ "$UNAME" = Darwin ]; then
         MANPATH="$PORTS/share/man:$MANPATH"
 
         # nice little port alias
-        alias port="sudo nice -n +18 $PORTS/bin/port"
+        alias port="sudo nice -n +18 $PORTS/bin/port -n"
     }
 
 #    test -x /usr/pkg -a ! -L /usr/pkg && {
