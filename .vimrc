@@ -96,7 +96,7 @@ set mat=2                  " duration to show matching brace (1/10 sec)
 set incsearch              " do incremental searching
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
-set nohlsearch             " don't highlight searches
+set hlsearch               " highlight searches
 set visualbell             " shut up
 
 " Format of status line:
@@ -173,6 +173,9 @@ inoremap <Up> <C-o>gk
 " do not menu with left / right in command line
 cnoremap <Left> <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
+
+" Ctrl+l to turn off search highlighting until next search
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
