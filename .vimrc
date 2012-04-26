@@ -55,7 +55,7 @@ highlight StatusLine      ctermfg=White ctermbg=Blue cterm=bold
 "   Highlight Trailing Whitespace
 " ----------------------------------------------------------------------------
 
-set list listchars=trail:.,tab:>.
+set list listchars=trail:.,tab:>.,extends:>,precedes:<
 highlight SpecialKey ctermfg=DarkGray ctermbg=Yellow
 
 " ----------------------------------------------------------------------------
@@ -261,7 +261,7 @@ map ,w :call Browser ()<CR>
 " ---------------------------------------------------------------------------
 
 function! StripWhitespace ()
-    exec ':%s/ \+$//gc'
+    exec ':%s/\s\+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
 
