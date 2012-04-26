@@ -151,8 +151,8 @@ let mapleader = ","
 " emacs movement keybindings in insert mode
 imap <C-a> <C-o>0
 imap <C-e> <C-o>$
-map <C-e> $
-map <C-a> 0
+"map <C-e> $
+"map <C-a> 0
 
 " reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
@@ -236,7 +236,7 @@ let g:is_bash = 1
 "  Misc mappings
 " ---------------------------------------------------------------------------
 
-map ,f :tabnew <cfile><CR>
+map <unique> <silent> <Leader>f <Plug>SimpleFold_Foldsearch
 map ,d :e %:h/<CR>
 map ,dt :tabnew %:h/<CR>
 
@@ -287,6 +287,7 @@ au BufRead,BufNewFile *.ronn       set ft=mkd tw=80 ts=2 sw=2 expandtab
 
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2
+au Filetype ruby      compiler ruby
 au Filetype html,xml,xsl,rhtml source $HOME/.vim/scripts/closetag.vim
 
 au BufNewFile,BufRead *.mustache        setf mustache
