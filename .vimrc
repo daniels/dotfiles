@@ -111,7 +111,7 @@ if has("statusline")
   set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"}
                                   " Current encoding
   set statusline+=%([%{&ff}]%)    " New line style (dos/unix)
-  set statusline+=%q              " Quickfix List?
+  "set statusline+=%q              " Quickfix List? -- Doesn't work on Vim < 7.2
   set statusline+=%h              " Help?
   set statusline+=%w              " Preview?
   set statusline+=%r              " Readonly?
