@@ -7,7 +7,50 @@ set history=1000                      " lots of command line history
 set cf                                " error files / jumping
 set ffs=unix,dos,mac                  " support these files
 " Initate Pathogen before `filetype plugin indent on`
-call pathogen#infect()
+""call pathogen#infect()
+
+fun! EnsureVamIsOnDisk(vam_install_path)
+  if !filereadable(a:vam_install_path.'/vim-addon-manager/.git/config')
+        \&& 1 == confirm("Clone VAM into ".a:vam_install_path."?","&Y\n&N")
+    call mkdir(a:vam_install_path, 'p')
+    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.shellescape(a:vam_install_path, 1).'/vim-addon-manager'
+    exec 'helptags '.fnameescape(a:vam_install_path.'/vim-addon-manager/doc')
+  endif
+endfun
+
+fun! SetupVAM()
+  let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
+  call EnsureVamIsOnDisk(vam_install_path)
+  exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
+
+  " Tell VAM which plugins to fetch & load:
+  call vam#ActivateAddons([
+        \ 'abolish',
+        \ 'ack',
+        \ 'Auto_Pairs',
+        \ 'github:tpope/vim-bundler',
+        \ 'Command-T',
+        \ 'commentary',
+        \ 'dbext',
+        \ 'endwise',
+        \ 'github:tpope/vim-eunuch',
+        \ 'fugitive',
+        \ 'git.zip',
+        \ 'markdown@tpope',
+        \ 'The_NERD_tree',
+        \ 'rake',
+        \ 'repeat',
+        \ 'github:vim-ruby/vim-ruby',
+        \ 'unimpaired',
+        \ 'vim-rvm',
+        \ 'github:pangloss/vim-simplefold',
+        \ 'snipmate-snippets',
+        \ 'surround',
+        \], {'auto_install' : 0})
+endfun
+
+call SetupVAM()
+
 filetype plugin indent on             " load filetype plugin
 set isk+=_,$,@,%,#,-                  " none word dividers
 set viminfo='1000,f1,:100,@100,/20
