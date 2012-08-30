@@ -41,13 +41,18 @@ fun! SetupVAM()
         \ 'rake',
         \ 'repeat',
         \ 'github:vim-ruby/vim-ruby',
+        \ 'snipmate-snippets',
         \ 'unimpaired',
         \ 'vim-rvm',
         \ 'github:pangloss/vim-simplefold',
-        \ 'snipmate-snippets',
-        \ 'surround',
+        \ 'surround'
         \], {'auto_install' : 0})
 endfun
+
+" Setting needed to be able to type swedish letter "å" with Auto Pairs ...
+if !exists('g:AutoPairsShortcutFastWrap')
+  let g:AutoPairsShortcutFastWrap = ''
+end
 
 call SetupVAM()
 
@@ -324,9 +329,9 @@ au BufRead,BufNewFile *.sql        set ft=pgsql
 au BufRead,BufNewFile *.rl         set ft=ragel
 au BufRead,BufNewFile *.svg        set ft=svg
 au BufRead,BufNewFile *.haml       set ft=haml
-au BufRead,BufNewFile *.md         set ft=mkd tw=80 ts=2 sw=2 expandtab
-au BufRead,BufNewFile *.markdown   set ft=mkd tw=80 ts=2 sw=2 expandtab
-au BufRead,BufNewFile *.ronn       set ft=mkd tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.md         set ft=markdown tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.markdown   set ft=markdown tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.ronn       set ft=markdown tw=80 ts=2 sw=2 expandtab
 
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2
