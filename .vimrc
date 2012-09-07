@@ -191,6 +191,15 @@ set virtualedit=block      " allow virtual edit in visual block ..
 " remap <LEADER> to ',' (instead of '\')
 let mapleader = ","
 
+" Leave insert mode with jj
+inoremap jj <Esc>
+
+" Faster split navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " quickfix mappings
 "map <F7>  :cn<CR>
 "map <S-F7> :cp<CR>
@@ -224,6 +233,9 @@ cnoremap <Right> <Space><BS><Right>
 
 " Ctrl+l to turn off search highlighting until next search
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! %!sudo tee > /dev/null %
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
