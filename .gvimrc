@@ -65,5 +65,5 @@ set list listchars=trail:·,tab:>·,extends:‥,precedes:‥
 
 highlight SpecialKey    guifg=#222222 guibg=#ffff99
 highlight StatusLineNC  guifg=#AAAAAA guibg=#222222 gui=none
-highlight StatusLine    guifg=#FFFFFF guibg=#336699 gui=none
+highlight StatusLine    guifg=#FFFFFF guibg=#009900 gui=none
 highlight LineNr        guifg=#999999 guibg=#eeeeee gui=none

@@ -29,19 +29,19 @@ fun! SetupVAM()
         \ 'ack',
         \ 'Auto_Pairs',
         \ 'github:tpope/vim-bundler',
-        \ 'Command-T',
         \ 'commentary',
+        \ 'github:kien/ctrlp.vim',
         \ 'dbext',
         \ 'endwise',
         \ 'github:tpope/vim-eunuch',
         \ 'fugitive',
         \ 'git.zip',
         \ 'markdown@tpope',
-        \ 'The_NERD_tree',
         \ 'rake',
         \ 'repeat',
         \ 'github:vim-ruby/vim-ruby',
         \ 'snipmate-snippets',
+        \ 'github:godlygeek/tabular',
         \ 'unimpaired',
         \ 'vim-rvm',
         \ 'github:pangloss/vim-simplefold',
@@ -237,6 +237,10 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! %!sudo tee > /dev/null %
 
+" Delete buffer without closing window/pane
+nnoremap ,bd :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap ,bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
+
 " ----------------------------------------------------------------------------
 "  Auto Commands
 " ----------------------------------------------------------------------------
@@ -247,6 +251,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
+
+
+
 
 " ----------------------------------------------------------------------------
 "  dbext  - connect to any database and do crazy shit
@@ -259,6 +266,18 @@ autocmd FileType javascript setlocal nocindent
 "let g:dbext_default_replace_title = 1
 "let g:dbext_default_history_file = '~/.dbext_history'
 "let g:dbext_default_history_size = 200
+
+" Load database configuration
+if filereadable('.dbext.vimrc')
+  source .dbext.vimrc
+endif
+
+" ----------------------------------------------------------------------------
+"  NetRW - read write network (AND local!) files
+" ----------------------------------------------------------------------------
+
+" List files as tree
+let g:netrw_liststyle=3
 
 " ----------------------------------------------------------------------------
 "  LookupFile
@@ -297,8 +316,8 @@ let g:is_bash = 1
 " ---------------------------------------------------------------------------
 
 map <unique> <silent> <Leader>f <Plug>SimpleFold_Foldsearch
-map ,d :e %:h/<CR>
-map ,dt :tabnew %:h/<CR>
+map <leader>d :e %:h/<CR>
+map <leader>,dt :tabnew %:h/<CR>
 
 " I use these commands in my TODO file
 "map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
