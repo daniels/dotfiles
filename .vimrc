@@ -21,7 +21,7 @@ endfun
 let g:vimrc_dir = expand('<sfile>:p:h')
 
 fun! SetupVAM()
-  if system('uname') =~ 'WindowsNT'
+  if system('uname') =~ 'WindowsNT\|MINGW32_NT'
     let vam_install_path = g:vimrc_dir . '\.vim\vim-addons'
     call EnsureVamIsOnDisk(vam_install_path)
     exec 'set runtimepath+=' . vam_install_path . '\vim-addon-manager'
