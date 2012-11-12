@@ -18,11 +18,18 @@ fun! EnsureVamIsOnDisk(vam_install_path)
   endif
 endfun
 
-fun! SetupVAM()
-  let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
-  call EnsureVamIsOnDisk(vam_install_path)
-  exec 'set runtimepath+='.vam_install_path.'/vim-addon-manager'
+let g:vimrc_dir = expand('<sfile>:p:h')
 
+fun! SetupVAM()
+  if system('uname') =~ 'WindowsNT'
+    let vam_install_path = g:vimrc_dir . '\.vim\vim-addons'
+    call EnsureVamIsOnDisk(vam_install_path)
+    exec 'set runtimepath+=' . vam_install_path . '\vim-addon-manager'
+  else
+    let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
+    call EnsureVamIsOnDisk(vam_install_path)
+    exec "set runtimepath+='" . fnameescape(vam_install_path) . "/vim-addon-manager'"
+  endif
   " Tell VAM which plugins to fetch & load:
   call vam#ActivateAddons([
         \ 'abolish',
