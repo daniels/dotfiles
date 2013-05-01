@@ -1,5 +1,5 @@
 #!/bin/bash
-# A hopefully portable bash environment, based on Ryan Tomayko's 
+# A hopefully portable bash environment, based on Ryan Tomayko's
 # "basically sane bash environment".
 #
 # Note: Use ~/.shenv for system specific configuration
@@ -327,6 +327,9 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
 }
 
 # vim: ts=4 sts=4 shiftwidth=4 expandtab
+
+# Managed perl
+[[ -s ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
 
 # rvm-install added line:
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
