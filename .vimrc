@@ -41,6 +41,7 @@ fun! SetupVAM()
         \ 'repeat',
         \ 'github:vim-ruby/vim-ruby',
         \ 'snipmate-snippets',
+        \ 'Solarized',
         \ 'github:godlygeek/tabular',
         \ 'unimpaired',
         \ 'vim-rvm',
@@ -77,34 +78,45 @@ endif
 " Colors / Theme
 " ---------------------------------------------------------------------------
 
-if &t_Co > 2 || has("gui_running")
-  if has("terminfo")
-    set t_Co=16
-    set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
-    set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
-  else
-    set t_Co=16
-    set t_Sf=[3%dm
-    set t_Sb=[4%dm
-  endif
+try
+  " Default to use solarized
+  set background=light
+  set t_Co=256
+  colorscheme solarized
   syntax on
   set hlsearch
-endif
+catch /^Vim\%((\a\+)\)\=:E185/
+  " Fall back if theme not installed (and term possibly not color)
+  if &t_Co > 2 || has("gui_running")
+    if has("terminfo")
+      set t_Co=16
+      set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+      set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+    else
+      set t_Co=16
+      set t_Sf=[3%dm
+      set t_Sb=[4%dm
+    endif
+    syntax on
+    set hlsearch
+  endif
+endtry
+
 
 " ---------------------------------------------------------------------------
 "  Highlight
 " ---------------------------------------------------------------------------
 
-highlight Comment         ctermfg=DarkGrey guifg=#444444
-highlight StatusLineNC    ctermfg=LightGrey ctermbg=Black cterm=bold
-highlight StatusLine      ctermfg=White ctermbg=Blue cterm=bold
+"highlight Comment         ctermfg=DarkGrey guifg=#444444
+"highlight StatusLineNC    ctermfg=LightGrey ctermbg=Black cterm=bold
+"highlight StatusLine      ctermfg=White ctermbg=Blue cterm=bold
 
 " ----------------------------------------------------------------------------
 "   Highlight Trailing Whitespace
 " ----------------------------------------------------------------------------
 
 set list listchars=trail:.,tab:>.,extends:>,precedes:<
-highlight SpecialKey ctermfg=DarkGray ctermbg=Yellow
+"highlight SpecialKey ctermfg=DarkGray ctermbg=Yellow
 
 " ----------------------------------------------------------------------------
 "  Backups
