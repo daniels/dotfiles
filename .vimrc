@@ -8,6 +8,10 @@ set cf                                " error files / jumping
 set ffs=unix,dos,mac                  " support these files
 " Initate Pathogen before `filetype plugin indent on`
 ""call pathogen#infect()
+filetype plugin indent on             " load filetype plugin
+
+" Enable the matchit-plugin that comes bundled with vim
+runtime macros/matchit.vim
 
 fun! EnsureVamIsOnDisk(vam_install_path)
   if !filereadable(a:vam_install_path.'/vim-addon-manager/.git/config')
@@ -30,9 +34,11 @@ fun! SetupVAM()
         \ 'Auto_Pairs',
         \ 'github:tpope/vim-bundler',
         \ 'commentary',
+        \ 'csv',
         \ 'github:kien/ctrlp.vim',
         \ 'dbext',
         \ 'endwise',
+        \ 'EasyMotion',
         \ 'github:tpope/vim-eunuch',
         \ 'fugitive',
         \ 'git.zip',
@@ -40,6 +46,7 @@ fun! SetupVAM()
         \ 'rake',
         \ 'repeat',
         \ 'github:vim-ruby/vim-ruby',
+        \ 'github:vim-scripts/scratch.vim',
         \ 'snipmate-snippets',
         \ 'Solarized',
         \ 'github:godlygeek/tabular',
@@ -57,7 +64,6 @@ end
 
 call SetupVAM()
 
-filetype plugin indent on             " load filetype plugin
 set isk+=_,$,@,%,#,-                  " none word dividers
 set viminfo='1000,f1,:100,@100,/20
 set modeline                          " make sure modeline support is enabled
