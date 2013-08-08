@@ -49,6 +49,7 @@ fun! SetupVAM()
         \ 'github:vim-scripts/scratch.vim',
         \ 'snipmate-snippets',
         \ 'Solarized',
+        \ 'Syntastic',
         \ 'github:godlygeek/tabular',
         \ 'unimpaired',
         \ 'vim-rvm',
