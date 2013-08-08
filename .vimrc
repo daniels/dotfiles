@@ -32,7 +32,7 @@ fun! SetupVAM()
   else
     let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
     call EnsureVamIsOnDisk(vam_install_path)
-    exec "set runtimepath+='" . fnameescape(vam_install_path) . "/vim-addon-manager'"
+    exec 'set runtimepath+=' . fnameescape(vam_install_path) . '/vim-addon-manager'
   endif
   " Tell VAM which plugins to fetch & load:
   call vam#ActivateAddons([
