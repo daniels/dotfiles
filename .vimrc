@@ -249,15 +249,18 @@ inoremap <Up> <C-o>gk
 cnoremap <Left> <Space><BS><Left>
 cnoremap <Right> <Space><BS><Right>
 
-" Ctrl+l to turn off search highlighting until next search
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+" ,l to turn off search highlighting until next search
+nnoremap <silent> <leader>l :<C-u>nohlsearch<CR><C-l>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! %!sudo tee > /dev/null %
 
 " Delete buffer without closing window/pane
-nnoremap ,bd :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap ,bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
+nnoremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
+
+" Autoformat entire file (and return cursor to position)
+map ,= gg=G''
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
@@ -311,16 +314,19 @@ let g:netrw_liststyle=3
 "imap <unique> <silent> <D-f> <C-O><Plug>LookupFile
 
 " ----------------------------------------------------------------------------
-"  PATH on MacOS X
+"  On MacOS X
 " ----------------------------------------------------------------------------
 
-"if system('uname') =~ 'Darwin'
+if system('uname') =~ 'Darwin'
 "  let $PATH = $HOME .
 "    \ '/usr/local/bin:/usr/local/sbin:' .
 "    \ '/usr/pkg/bin:' .
 "    \ '/opt/local/bin:/opt/local/sbin:' .
 "    \ $PATH
-"endif
+
+  " Use Marked to preview markdown files
+  nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+endif
 
 " ---------------------------------------------------------------------------
 "  sh config
@@ -335,7 +341,7 @@ let g:is_bash = 1
 
 map <unique> <silent> <Leader>f <Plug>SimpleFold_Foldsearch
 map <leader>d :e %:h/<CR>
-map <leader>,dt :tabnew %:h/<CR>
+map <leader>dt :tabnew %:h/<CR>
 
 " I use these commands in my TODO file
 "map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
@@ -343,6 +349,28 @@ map <leader>,dt :tabnew %:h/<CR>
 "map ,O O[ ] 
 "map ,x :s/^\[ \]/[x]/<CR>
 "map ,X :s/^\[x\]/[ ]/<CR>
+
+
+" ---------------------------------------------------------------------------
+" Custom functions
+" ---------------------------------------------------------------------------
+
+" Wrap a command with Preserve () and the cursor will be restored after
+" execution.
+" From
+" http://technotales.wordpress.com/2010/03/31/preserve-a-vim-function-that-keeps-your-state/
+" via
+" http://vimcasts.org/episodes/tidying-whitespace/
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let save_cursor = getpos(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call setpos('.', save_cursor)
+endfunction
 
 " ---------------------------------------------------------------------------
 "  Open URL on current line in browser
@@ -354,16 +382,13 @@ function! Browser ()
     let line = escape (line, "#?&;|%")
     exec ':silent !open ' . "\"" . line . "\""
 endfunction
-map ,w :call Browser ()<CR>
+map <leader>w :call Browser ()<CR>
 
-" ---------------------------------------------------------------------------
-"  Strip all trailing whitespace in file
-" ---------------------------------------------------------------------------
-
+" Strip whitespace in entire file (confirm with `a` to strip all)
 function! StripWhitespace ()
-    exec ':%s/\s\+$//gc'
+    call Preserve (':%s/\s\+$//ce')
 endfunction
-map ,s :call StripWhitespace ()<CR>
+map <leader>s :call StripWhitespace ()<CR>
 
 " ---------------------------------------------------------------------------
 " File Types
