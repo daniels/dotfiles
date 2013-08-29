@@ -143,10 +143,25 @@ prompt_compact() {
     PS2="> "
 }
 
+GIT_PS1_SHOWCOLORHINTS="Y"
+GIT_PS1_SHOWDIRTYSTATE="Y"
+GIT_PS1_SHOWSTASHSTATE="Y"
+GIT_PS1_SHOWUNTRACKEDFILES="Y"
+GIT_PS1_SHOWUPSTREAM="auto"
+
+
+git_ps1() {
+    [ $(command -v __git_ps1) ] || return
+    GD="$(git rev-parse --show-toplevel 2>/dev/null)"
+    [ "$GD" = "$HOME" ] && return
+    __git_ps1 ' (%s)'
+}
+
 prompt_color() {
-    PS1="${BASE1}[${COLOR1}\u${BASE1}@${COLOR2}\h${BASE1}:${COLOR1}\W${BASE1}]${COLOR2}$P${PS_CLEAR} "
+    PS1="${BASE1}[${COLOR1}\u${BASE1}@${COLOR2}\h${BASE1}:${COLOR1}\W${BASE1}\$(git_ps1)${BASE1}]${COLOR2}$P${PS_CLEAR} "
     PS2="\[[33;1m\]continue \[[0m[1m\]> "
 }
+
 
 # ----------------------------------------------------------------------
 # MACOS X / DARWIN SPECIFIC
@@ -187,6 +202,24 @@ fi
 #alias hi='history | tail -20'
 
 # ----------------------------------------------------------------------
+# GIT PROMPT (used in commands above)
+# ----------------------------------------------------------------------
+
+test "$(command -v __git_ps1)" || {
+    for f in /usr/local/share/git-prompt.sh \
+             /usr/local/etc/git-prompt.sh \
+             /usr/pkg/etc/git-prompt.sh \
+             /opt/local/etc/git-prompt.sh \
+             /etc/git-prompt.sh
+    do
+        test -f $f && {
+            . $f
+            break
+        }
+    done
+}
+
+# ----------------------------------------------------------------------
 # BASH COMPLETION
 # ----------------------------------------------------------------------
 
@@ -208,7 +241,6 @@ test -z "$BASH_COMPLETION" && {
     }
     unset bash bmajor bminor
 }
-
 # ----------------------------------------------------------------------
 # LS AND DIRCOLORS
 # ----------------------------------------------------------------------
