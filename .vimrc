@@ -25,7 +25,7 @@ endfun
 let g:vimrc_dir = expand('<sfile>:p:h')
 
 fun! SetupVAM()
-  if system('uname') =~ 'WindowsNT\|MINGW32_NT'
+  if has('win32')
     let vam_install_path = g:vimrc_dir . '\.vim\vim-addons'
     call EnsureVamIsOnDisk(vam_install_path)
     exec 'set runtimepath+=' . vam_install_path . '\vim-addon-manager'
@@ -36,32 +36,33 @@ fun! SetupVAM()
   endif
   " Tell VAM which plugins to fetch & load:
   call vam#ActivateAddons([
-        \ 'abolish',
-        \ 'ack',
-        \ 'Auto_Pairs',
-        \ 'github:tpope/vim-bundler',
-        \ 'commentary',
-        \ 'csv',
-        \ 'github:kien/ctrlp.vim',
-        \ 'dbext',
-        \ 'endwise',
-        \ 'EasyMotion',
-        \ 'github:tpope/vim-eunuch',
-        \ 'fugitive',
-        \ 'git.zip',
-        \ 'markdown@tpope',
-        \ 'rake',
-        \ 'repeat',
-        \ 'github:vim-ruby/vim-ruby',
-        \ 'github:vim-scripts/scratch.vim',
-        \ 'snipmate-snippets',
-        \ 'Solarized',
-        \ 'Syntastic',
+        \ 'github:Lokaltog/vim-easymotion',
+        \ 'github:altercation/vim-colors-solarized',
+        \ 'github:chrisbra/csv.vim',
         \ 'github:godlygeek/tabular',
-        \ 'unimpaired',
-        \ 'vim-rvm',
+        \ 'github:kien/ctrlp.vim',
+        \ 'github:mileszs/ack.vim',
         \ 'github:pangloss/vim-simplefold',
-        \ 'surround'
+        \ 'github:scrooloose/snipmate-snippets',
+        \ 'github:scrooloose/syntastic',
+        \ 'github:tpope/vim-abolish',
+        \ 'github:tpope/vim-bundler',
+        \ 'github:tpope/vim-commentary',
+        \ 'github:tpope/vim-endwise',
+        \ 'github:tpope/vim-dispatch',
+        \ 'github:tpope/vim-eunuch',
+        \ 'github:tpope/vim-fugitive',
+        \ 'github:tpope/vim-git',
+        \ 'github:tpope/vim-markdown',
+        \ 'github:tpope/vim-rake',
+        \ 'github:tpope/vim-repeat',
+        \ 'github:tpope/vim-rvm',
+        \ 'github:tpope/vim-surround',
+        \ 'github:tpope/vim-unimpaired',
+        \ 'github:vim-ruby/vim-ruby',
+        \ 'github:vim-scripts/Auto-Pairs',
+        \ 'github:vim-scripts/dbext.vim',
+        \ 'github:vim-scripts/scratch.vim'
         \], {'auto_install' : 0})
 endfun
 
