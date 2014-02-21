@@ -201,6 +201,10 @@ fi
 #alias fn='find . -name'
 #alias hi='history | tail -20'
 
+if [ -n "$SSH_CLIENT" ]; then
+    alias pbcopy="nc -c localhost 2224"
+fi
+
 # ----------------------------------------------------------------------
 # GIT PROMPT (used in commands above)
 # ----------------------------------------------------------------------
