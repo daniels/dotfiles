@@ -337,6 +337,41 @@ puniq () {
     cut -f 2- |tr '\n' : |sed -e 's/:$//' -e 's/^://'
 }
 
+# Usage: inject_path_after <match_path> [<new_path> [...]]
+# Move path entries matching <match_path>* to the start of PATH,
+# inserts each <new_path> after it but before all other existing PATH entries
+#
+# Example:
+#   $ echo $PATH
+#   /usr/local/rvm/bin:/usr/bin:/bin
+#   $ inject_path_after /usr/local/rvm /usr/local/bin /opt/local/bin
+#   $ echo $PATH
+#   /usr/local/rvm/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin
+#
+# Thanks @mpapis!
+function inject_path_after()
+{
+  typeset __entry __search IFS=:
+  typeset -a splited_path matched_path rest_path
+  matched_path=()
+  rest_path=()
+  if [[ -n "${ZSH_VERSION:-}" ]]
+  then splited_path=( ${=PATH} )
+  else splited_path=( $PATH )
+  fi
+  __search="$1"
+  shift
+  for __entry in "${splited_path[@]}"
+  do
+    if [[ "$__entry" == "$__search"* ]]
+    then matched_path+=( "$__entry" )
+    else rest_path+=( "$__entry" )
+    fi
+  done
+  splited_path=( "${matched_path[@]}" "$@" "${rest_path[@]}" )
+  PATH="${splited_path[*]}"
+}
+
 # -------------------------------------------------------------------
 # USER SHELL ENVIRONMENT
 # -------------------------------------------------------------------
@@ -348,6 +383,7 @@ test -r ~/.shenv &&
 # condense PATH entries
 PATH=$(puniq $PATH)
 MANPATH=$(puniq $MANPATH)
+inject_path_after "$rvm_path"
 
 # Use the color prompt by default when interactive
 test -n "$PS1" &&
@@ -369,5 +405,5 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
 
 # rvm-install added line:
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
+[[ -s ~/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
