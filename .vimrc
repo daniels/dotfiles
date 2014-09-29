@@ -38,7 +38,7 @@ fun! SetupVAM()
   call vam#ActivateAddons([
         \ 'github:Lokaltog/vim-easymotion',
         \ 'github:altercation/vim-colors-solarized',
-        \ 'github:chrisbra/csv.vim',
+        \ 'github:ervandew/supertab',
         \ 'github:godlygeek/tabular',
         \ 'github:kien/ctrlp.vim',
         \ 'github:mileszs/ack.vim',
@@ -60,11 +60,13 @@ fun! SetupVAM()
         \ 'github:tpope/vim-surround',
         \ 'github:tpope/vim-unimpaired',
         \ 'github:vim-ruby/vim-ruby',
+        \ 'github:vim-scripts/applescript.vim',
         \ 'github:vim-scripts/Auto-Pairs',
         \ 'github:vim-scripts/dbext.vim',
         \ 'github:vim-scripts/scratch.vim'
         \], {'auto_install' : 0})
 endfun
+
 
 " Setting needed to be able to type swedish letter "å" with Auto Pairs ...
 if !exists('g:AutoPairsShortcutFastWrap')
@@ -334,7 +336,7 @@ if system('uname') =~ 'Darwin'
 "    \ $PATH
 
   " Use Marked to preview markdown files
-  nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+  nnoremap <leader>m :silent !open -a "Marked 2" '%:p'<cr>
 endif
 
 " ---------------------------------------------------------------------------
