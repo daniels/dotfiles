@@ -61,6 +61,8 @@ fun! SetupVAM()
         \ 'github:tpope/vim-surround',
         \ 'github:tpope/vim-unimpaired',
         \ 'github:vim-ruby/vim-ruby',
+        \ 'github:vim-pandoc/vim-pandoc',
+        \ 'github:vim-pandoc/vim-pandoc-syntax',
         \ 'github:vim-scripts/applescript.vim',
         \ 'github:vim-scripts/Auto-Pairs',
         \ 'github:vim-scripts/dbext.vim',
@@ -213,6 +215,24 @@ set nosmarttab             " fuck tabs
 set formatoptions+=n       " support for numbered/bullet lists
 set textwidth=80           " wrap at 80 chars by default
 set virtualedit=block      " allow virtual edit in visual block ..
+
+
+" ---------------
+" Pandoc Markdown
+" ---------------
+
+let g:pandoc#syntax#conceal#blacklist=[
+    \ 'titleblock',
+    \ 'image',
+    \ 'subscript',
+    \ 'superscript',
+    \ 'strikeout',
+    \ 'atx',
+    \ 'codeblock_start',
+    \ 'codeblock_delim',
+    \ 'definition',
+    \ 'list'
+    \  ]
 
 " ----------------------------------------------------------------------------
 "  Mappings
@@ -440,9 +460,10 @@ au BufRead,BufNewFile *.sql        set ft=pgsql
 au BufRead,BufNewFile *.rl         set ft=ragel
 au BufRead,BufNewFile *.svg        set ft=svg
 au BufRead,BufNewFile *.haml       set ft=haml
-au BufRead,BufNewFile *.md         set ft=markdown tw=80 ts=2 sw=2 expandtab
-au BufRead,BufNewFile *.markdown   set ft=markdown tw=80 ts=2 sw=2 expandtab
-au BufRead,BufNewFile *.ronn       set ft=markdown tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.md         set ft=pandoc tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.markdown   set ft=pandoc tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.ronn       set ft=pandoc tw=80 ts=2 sw=2 expandtab
+
 
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2
