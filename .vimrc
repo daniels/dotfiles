@@ -38,6 +38,7 @@ fun! SetupVAM()
   call vam#ActivateAddons([
         \ 'github:Lokaltog/vim-easymotion',
         \ 'github:altercation/vim-colors-solarized',
+        \ 'github:benmills/vimux',
         \ 'github:ervandew/supertab',
         \ 'github:godlygeek/tabular',
         \ 'github:kien/ctrlp.vim',
@@ -272,6 +273,31 @@ nnoremap <leader>bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
 
 " Autoformat entire file (and return cursor to position)
 map ,= gg=G''
+
+" Vimux
+" -----
+"
+" Run the current file
+map <leader>rb :call VimuxRunCommand("clear; ./" . bufname("%"))<CR>
+"
+" Prompt for a command to run
+map <leader>vp :VimuxPromptCommand<CR>
+"
+" Run last command executed by VimuxRunCommand
+map <leader>vl :VimuxRunLastCommand<CR>
+"
+" Inspect runner pane
+map <leader>vi :VimuxInspectRunner<CR>
+"
+" Close vim tmux runner opened by VimuxRunCommand
+map <leader>vq :VimuxCloseRunner<CR>
+"
+" Interrupt any command running in the runner pane
+map <leader>vx :VimuxInterruptRunner<CR>
+"
+" Zoom the runner pane (use <bind-key> z to restore runner pane)
+map <leader>vz :call VimuxZoomRunner()<CR>
+" ____
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
