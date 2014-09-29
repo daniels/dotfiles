@@ -463,12 +463,18 @@ au BufRead,BufNewFile *.haml       set ft=haml
 au BufRead,BufNewFile *.md         set ft=pandoc tw=80 ts=2 sw=2 expandtab
 au BufRead,BufNewFile *.markdown   set ft=pandoc tw=80 ts=2 sw=2 expandtab
 au BufRead,BufNewFile *.ronn       set ft=pandoc tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.opml       set ft=xml
 
 
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2
 au Filetype ruby      compiler ruby
 au Filetype html,xml,xsl,rhtml source $HOME/.vim/scripts/closetag.vim
+au Filetype xml       set foldmethod=syntax
+let g:xml_syntax_folding = 1
+
+au Filetype javascript setlocal ts=4 sts=4 sw=4
+au Filetype perl setlocal ts=4 sts=4 sw=4
 
 au BufNewFile,BufRead *.mustache        setf mustache
 
