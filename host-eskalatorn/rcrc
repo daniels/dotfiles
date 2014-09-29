@@ -1,0 +1,2 @@
+HOSTNAME=eskalatorn
+SYMLINK_DIRS=*:vim

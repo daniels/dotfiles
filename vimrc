@@ -65,6 +65,7 @@ fun! SetupVAM()
         \ 'github:vim-pandoc/vim-pandoc-syntax',
         \ 'github:vim-scripts/applescript.vim',
         \ 'github:vim-scripts/Auto-Pairs',
+        \ 'github:vim-scripts/closetag.vim',
         \ 'github:vim-scripts/dbext.vim',
         \ 'github:vim-scripts/scratch.vim'
         \], {'auto_install' : 0})
