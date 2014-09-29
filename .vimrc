@@ -123,8 +123,8 @@ endtry
 " ---------------------------------------------------------------------------
 
 "highlight Comment         ctermfg=DarkGrey guifg=#444444
-"highlight StatusLineNC    ctermfg=LightGrey ctermbg=Black cterm=bold
-"highlight StatusLine      ctermfg=White ctermbg=Blue cterm=bold
+"highlight StatusLineNC    ctermfg=Black ctermbg=White cterm=bold
+highlight StatusLine      ctermfg=White ctermbg=DarkBlue cterm=bold
 
 " ----------------------------------------------------------------------------
 "   Highlight Trailing Whitespace
