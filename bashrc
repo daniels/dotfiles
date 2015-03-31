@@ -377,8 +377,8 @@ function inject_path_after()
 # -------------------------------------------------------------------
 
 # source ~/.shenv now if it exists
-test -r ~/.shenv &&
-. ~/.shenv
+test -r ~/.bashrc.local &&
+. ~/.bashrc.local
 
 # condense PATH entries
 PATH=$(puniq $PATH)
