@@ -107,7 +107,6 @@ if executable('seeing_is_believing')
 endif
 
 " --- Unused plugins
-" Plug 'vim-scripts/dbext.vim'
 " Plug 'vim-scripts/scratch.vim'
 
 call plug#end()
@@ -364,26 +363,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
-
-
-
-
-" ----------------------------------------------------------------------------
-"  dbext  - connect to any database and do crazy shit
-" ----------------------------------------------------------------------------
-
-"let g:dbext_default_buffer_lines = 20            " result buffer size
-"let g:dbext_default_use_result_buffer = 1
-"let g:dbext_default_use_sep_result_buffer = 1    " multiple result buffers
-"let g:dbext_default_type = 'pgsql'
-"let g:dbext_default_replace_title = 1
-"let g:dbext_default_history_file = '~/.dbext_history'
-"let g:dbext_default_history_size = 200
-
-" Load database configuration
-if filereadable('.dbext.vimrc')
-  source .dbext.vimrc
-endif
 
 " ----------------------------------------------------------------------------
 "  NetRW - read write network (AND local!) files
