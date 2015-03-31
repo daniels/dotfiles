@@ -44,6 +44,7 @@ fun! SetupVAM()
         \ 'github:kien/ctrlp.vim',
         \ 'github:mileszs/ack.vim',
         \ 'github:pangloss/vim-simplefold',
+        \ 'github:rking/ag.vim',
         \ 'github:scrooloose/snipmate-snippets',
         \ 'github:scrooloose/syntastic',
         \ 'github:t9md/vim-ruby-xmpfilter',
