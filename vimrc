@@ -5,38 +5,108 @@
 call plug#begin('~/.vim/bundle')
 let g:plug_timeout = 300
 
-" Plug 'Lokaltog/vim-easymotion'
+" Solarized for Vim
 Plug 'altercation/vim-colors-solarized'
-" Plug 'benmills/vimux'
-Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
-Plug 'mileszs/ack.vim'
-" Plug 'pangloss/vim-simplefold'
-Plug 'rking/ag.vim'
-" Plug 'scrooloose/snipmate-snippets'
-Plug 'scrooloose/syntastic'
-Plug 't9md/vim-ruby-xmpfilter'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
+
+" --- Syntax and more ---
+Plug 'vim-scripts/applescript.vim'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-rvm'
-Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-unimpaired'
-Plug 'vim-ruby/vim-ruby'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-scripts/applescript.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'vim-ruby/vim-ruby'
+
+" Powerful syntax checking
+Plug 'scrooloose/syntastic'
+
+" -- Editing aids ---
+
+" Autocompletion by tab
+Plug 'ervandew/supertab'
+
+" Align code on characters or regexps
+Plug 'godlygeek/tabular'
+
+" Easily search for, substitute, and abbreviate multiple variants of a word
+Plug 'tpope/vim-abolish'
+
+" Quoting/parenthesizing made simple
+Plug 'tpope/vim-surround'
+
+" Comment and uncomment lines
+Plug 'tpope/vim-commentary'
+
+" Use <C-_> to close tags
 Plug 'vim-scripts/closetag.vim'
+
+" Autoclose parens and more ...
+Plug 'cohama/lexima.vim'
+"Plug 'tpope/vim-endwise'
+"Plug 'jiangmiao/auto-pairs'
+
+" --- Search ---
+
+" Search for files
+Plug 'kien/ctrlp.vim'
+
+" Search in files
+Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+
+" Plug 'pangloss/vim-simplefold'
+" Plug 'scrooloose/snipmate-snippets'
+
+" --- Utilities ---
+
+" Run commands in the background
+Plug 'tpope/vim-dispatch'
+
+" Utility that help other plugins support repeat
+Plug 'tpope/vim-repeat'
+
+" --- Integrations, wrappers and more ---
+
+" Integrate with ruby bundler
+Plug 'tpope/vim-bundler'
+
+" Git wrapper
+Plug 'tpope/vim-fugitive'
+
+" Ruby project utilities
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rake'
+
+" Helpers for UNIX
+Plug 'tpope/vim-eunuch'
+
+" Evaluate ruby and display results inline
+"
+" gem install seeing_is_believing
+"
+if executable('seeing_is_believing')
+  Plug 't9md/vim-ruby-xmpfilter'
+  let g:xmpfilter_cmd = "seeing_is_believing"
+
+  autocmd FileType ruby nmap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
+  autocmd FileType ruby xmap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
+  autocmd FileType ruby imap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
+
+  autocmd FileType ruby nmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+  autocmd FileType ruby xmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+  autocmd FileType ruby imap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+
+  " xmpfilter compatible
+  autocmd FileType ruby nmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+  autocmd FileType ruby xmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+  autocmd FileType ruby imap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+
+  " auto insert mark at appropriate spot.
+  autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+  autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+  autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
+endif
+
+" --- Unused plugins
 " Plug 'vim-scripts/dbext.vim'
 " Plug 'vim-scripts/scratch.vim'
 
@@ -283,50 +353,6 @@ nnoremap <leader>bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
 " Autoformat entire file (and return cursor to position)
 map ,= gg=G''
 
-" Vimux
-" -----
-"
-" Run the current file
-map <leader>rb :call VimuxRunCommand("clear; ./" . bufname("%"))<CR>
-"
-" Prompt for a command to run
-map <leader>vp :VimuxPromptCommand<CR>
-"
-" Run last command executed by VimuxRunCommand
-map <leader>vl :VimuxRunLastCommand<CR>
-"
-" Inspect runner pane
-map <leader>vi :VimuxInspectRunner<CR>
-"
-" Close vim tmux runner opened by VimuxRunCommand
-map <leader>vq :VimuxCloseRunner<CR>
-"
-" Interrupt any command running in the runner pane
-map <leader>vx :VimuxInterruptRunner<CR>
-"
-" Zoom the runner pane (use <bind-key> z to restore runner pane)
-map <leader>vz :call VimuxZoomRunner()<CR>
-" ____
-
-let g:xmpfilter_cmd = "seeing_is_believing"
-
-autocmd FileType ruby nmap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby xmap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby imap <buffer> <D-i> <Plug>(seeing_is_believing-mark)
-
-autocmd FileType ruby nmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby xmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby imap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-
-" xmpfilter compatible
-autocmd FileType ruby nmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby xmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby imap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-
-" auto insert mark at appropriate spot.
-autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
-autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
-autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
