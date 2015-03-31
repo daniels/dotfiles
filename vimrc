@@ -1,4 +1,48 @@
 " ---------------------------------------------------------------------------
+" Plugins
+" ---------------------------------------------------------------------------
+
+call plug#begin('~/.vim/bundle')
+let g:plug_timeout = 300
+
+" Plug 'Lokaltog/vim-easymotion'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'benmills/vimux'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+" Plug 'pangloss/vim-simplefold'
+Plug 'rking/ag.vim'
+" Plug 'scrooloose/snipmate-snippets'
+Plug 'scrooloose/syntastic'
+Plug 't9md/vim-ruby-xmpfilter'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-rvm'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-scripts/applescript.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/closetag.vim'
+" Plug 'vim-scripts/dbext.vim'
+" Plug 'vim-scripts/scratch.vim'
+
+call plug#end()
+
+" ---------------------------------------------------------------------------
 " General
 " ---------------------------------------------------------------------------
 
@@ -6,80 +50,15 @@ set nocompatible                      " essential
 set history=1000                      " lots of command line history
 set cf                                " error files / jumping
 set ffs=unix,dos,mac                  " support these files
-" Initate Pathogen before `filetype plugin indent on`
-""call pathogen#infect()
-filetype plugin indent on             " load filetype plugin
-
 " Enable the matchit-plugin that comes bundled with vim
 runtime macros/matchit.vim
 
-fun! EnsureVamIsOnDisk(vam_install_path)
-  if !filereadable(a:vam_install_path.'/vim-addon-manager/.git/config')
-        \&& 1 == confirm("Clone VAM into ".a:vam_install_path."?","&Y\n&N")
-    call mkdir(a:vam_install_path, 'p')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.shellescape(a:vam_install_path, 1).'/vim-addon-manager'
-    exec 'helptags '.fnameescape(a:vam_install_path.'/vim-addon-manager/doc')
-  endif
-endfun
-
-let g:vimrc_dir = expand('<sfile>:p:h')
-
-fun! SetupVAM()
-  if has('win32')
-    let vam_install_path = g:vimrc_dir . '\.vim\vim-addons'
-    call EnsureVamIsOnDisk(vam_install_path)
-    exec 'set runtimepath+=' . vam_install_path . '\vim-addon-manager'
-  else
-    let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
-    call EnsureVamIsOnDisk(vam_install_path)
-    exec 'set runtimepath+=' . fnameescape(vam_install_path) . '/vim-addon-manager'
-  endif
-  " Tell VAM which plugins to fetch & load:
-  call vam#ActivateAddons([
-        \ 'github:Lokaltog/vim-easymotion',
-        \ 'github:altercation/vim-colors-solarized',
-        \ 'github:benmills/vimux',
-        \ 'github:ervandew/supertab',
-        \ 'github:godlygeek/tabular',
-        \ 'github:kien/ctrlp.vim',
-        \ 'github:mileszs/ack.vim',
-        \ 'github:pangloss/vim-simplefold',
-        \ 'github:rking/ag.vim',
-        \ 'github:scrooloose/snipmate-snippets',
-        \ 'github:scrooloose/syntastic',
-        \ 'github:t9md/vim-ruby-xmpfilter',
-        \ 'github:tpope/vim-abolish',
-        \ 'github:tpope/vim-bundler',
-        \ 'github:tpope/vim-commentary',
-        \ 'github:tpope/vim-endwise',
-        \ 'github:tpope/vim-dispatch',
-        \ 'github:tpope/vim-eunuch',
-        \ 'github:tpope/vim-fugitive',
-        \ 'github:tpope/vim-git',
-        \ 'github:tpope/vim-markdown',
-        \ 'github:tpope/vim-rake',
-        \ 'github:tpope/vim-repeat',
-        \ 'github:tpope/vim-rvm',
-        \ 'github:tpope/vim-surround',
-        \ 'github:tpope/vim-unimpaired',
-        \ 'github:vim-ruby/vim-ruby',
-        \ 'github:vim-pandoc/vim-pandoc',
-        \ 'github:vim-pandoc/vim-pandoc-syntax',
-        \ 'github:vim-scripts/applescript.vim',
-        \ 'github:vim-scripts/Auto-Pairs',
-        \ 'github:vim-scripts/closetag.vim',
-        \ 'github:vim-scripts/dbext.vim',
-        \ 'github:vim-scripts/scratch.vim'
-        \], {'auto_install' : 0})
-endfun
-
+filetype plugin indent on             " load filetype plugin
 
 " Setting needed to be able to type swedish letter "å" with Auto Pairs ...
 if !exists('g:AutoPairsShortcutFastWrap')
   let g:AutoPairsShortcutFastWrap = ''
 end
-
-call SetupVAM()
 
 set isk+=_,$,@,%,#,-                  " none word dividers
 set viminfo='1000,f1,:100,@100,/20
@@ -499,7 +478,7 @@ au BufRead,BufNewFile *.opml       set ft=xml
 au Filetype gitcommit set tw=68  spell
 au Filetype ruby      set tw=80  ts=2
 au Filetype ruby      compiler ruby
-au Filetype html,xml,xsl,rhtml source $HOME/.vim/scripts/closetag.vim
+"au Filetype html,xml,xsl,rhtml source $HOME/.vim/scripts/closetag.vim
 au Filetype xml       set foldmethod=syntax
 let g:xml_syntax_folding = 1
 
