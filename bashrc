@@ -403,7 +403,13 @@ test -n "$INTERACTIVE" -a -n "$LOGIN" && {
 # Managed perl
 [[ -s ~/perl5/perlbrew/etc/bashrc ]] && source ~/perl5/perlbrew/etc/bashrc
 
-# rvm-install added line:
-[[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
-[[ -s ~/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin
+if [[ -f /usr/local/opt/chruby/share/chruby/chruby.sh ]]; then
+  source /usr/local/opt/chruby/share/chruby/chruby.sh
+  source /usr/local/opt/chruby/share/chruby/auto.sh
+else
+  echo "No chruby, trying rvm instead"
+  #rvm-install added line:
+  [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm
+  [[ -s ~/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin
+fi
 
