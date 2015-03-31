@@ -141,6 +141,13 @@ highlight StatusLine      ctermfg=White ctermbg=DarkBlue cterm=bold
 set list listchars=trail:.,tab:>.,extends:>,precedes:<
 "highlight SpecialKey ctermfg=DarkGray ctermbg=Yellow
 
+" Highlight long lines
+
+augroup vimrc_autocmds
+  autocmd BufEnter * highlight OverLength ctermbg=LightGrey guibg=#eee8d5
+  autocmd BufEnter * match OverLength /\%>80v./
+augroup END
+
 " ----------------------------------------------------------------------------
 "  Backups
 " ----------------------------------------------------------------------------
