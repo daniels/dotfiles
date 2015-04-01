@@ -1,4 +1,5 @@
 set nocompatible                      " essential
+let mapleader = ","
 
 " ---------------------------------------------------------------------------
 " Plugins
@@ -257,7 +258,6 @@ set virtualedit=block      " allow virtual edit in visual block ..
 " ----------------------------------------------------------------------------
 
 " remap <LEADER> to ',' (instead of '\')
-let mapleader = ","
 
 " Faster split navigation
 nnoremap <C-h> <C-w>h
