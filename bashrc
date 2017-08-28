@@ -413,3 +413,4 @@ else
   [[ -s ~/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin
 fi
 
+eval "$(direnv hook bash)"
