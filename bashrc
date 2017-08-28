@@ -271,6 +271,10 @@ alias ls="command ls $LS_COMMON"
 alias ll="ls -l"
 alias l.="ls -d .*"
 
+# Shortcuts to convert between encodings
+alias l2u="iconv -f latin1 -t utf8"
+alias u2l="iconv -f utf8 -t latin1"
+
 # --------------------------------------------------------------------
 # MISC COMMANDS
 # --------------------------------------------------------------------
