@@ -205,6 +205,23 @@ if [ -n "$SSH_CLIENT" ]; then
     alias pbcopy="nc -c localhost 2224"
 fi
 
+function has {
+    type $1 >/dev/null 2>&1
+}
+
+if has osascript; then
+    alias pbpaste-rtf="osascript -e 'the clipboard as \"RTF \"'| perl -ne 'print chr foreach unpack(\"C*\", pack(\"H*\", substr(\$_,11,-3)))'"
+fi
+
+if has textutil && has pbpaste-rtf; then
+    alias pbpaste-html="pbpaste-rtf | textutil -stdin -convert html -stdout"
+fi
+
+if has pandoc && has pbpaste-html; then
+    alias pbpaste-md="pbpaste-html | pandoc --from=html --to=markdown --reference-links"
+fi
+
+
 # ----------------------------------------------------------------------
 # GIT PROMPT (used in commands above)
 # ----------------------------------------------------------------------
