@@ -1,4 +1,5 @@
 SYMLINK_DIRS='*:vim'
+UNDOTTED='bin'
 
 [[ -f ~/.rcrc.local ]] && {
   . ~/.rcrc.local
