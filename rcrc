@@ -1,0 +1,5 @@
+SYMLINK_DIRS='*:vim'
+
+[[ -f ~/.rcrc.local ]] && {
+  . ~/.rcrc.local
+}
