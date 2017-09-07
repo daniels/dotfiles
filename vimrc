@@ -1,4 +1,6 @@
 set nocompatible                      " essential
+
+" remap <LEADER> to ',' (instead of '\')
 let mapleader = ","
 
 " ---------------------------------------------------------------------------
@@ -31,6 +33,8 @@ let g:pandoc#syntax#conceal#blacklist=[
     \  ]
 
 Plug 'vim-ruby/vim-ruby'
+Plug 'jaxbot/semantic-highlight.vim'
+Plug 'othree/html5.vim'
 
 " Powerful syntax checking
 Plug 'scrooloose/syntastic'
@@ -57,6 +61,12 @@ Plug 'vim-scripts/closetag.vim'
 
 " Autoclose parens and more ...
 Plug 'cohama/lexima.vim'
+
+" Utility for creating custom text objects
+Plug 'kana/vim-textobj-user'
+
+" Ruby blocks as text objects (ar ir)
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " --- Search ---
 
@@ -257,7 +267,6 @@ set virtualedit=block      " allow virtual edit in visual block ..
 "  Mappings
 " ----------------------------------------------------------------------------
 
-" remap <LEADER> to ',' (instead of '\')
 
 " Faster split navigation
 nnoremap <C-h> <C-w>h
@@ -342,6 +351,8 @@ endif
 "  Misc mappings
 " ---------------------------------------------------------------------------
 
+map <leader><leader> :w<CR>
+
 map <leader>d :e %:h/<CR>
 map <leader>dt :tabnew %:h/<CR>
 
@@ -385,32 +396,42 @@ map <leader>s :call StripWhitespace ()<CR>
 " File Types
 " ---------------------------------------------------------------------------
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*
+
 au BufRead,BufNewFile *.rpdf       set ft=ruby
 au BufRead,BufNewFile *.rxls       set ft=ruby
 au BufRead,BufNewFile *.ru         set ft=ruby
 au BufRead,BufNewFile *.god        set ft=ruby
+au BufRead,BufNewFile Rakefile     set ft=ruby
 au BufRead,BufNewFile *.rtxt       set ft=html spell
 au BufRead,BufNewFile *.sql        set ft=pgsql
 au BufRead,BufNewFile *.rl         set ft=ragel
 au BufRead,BufNewFile *.svg        set ft=svg
 au BufRead,BufNewFile *.haml       set ft=haml
-au BufRead,BufNewFile *.md         set ft=pandoc
-au BufRead,BufNewFile *.markdown   set ft=pandoc
-au BufRead,BufNewFile *.ronn       set ft=pandoc
+au BufRead,BufNewFile *.md         set ft=markdown
+au BufRead,BufNewFile *.markdown   set ft=markdown
+au BufRead,BufNewFile *.ronn       set ft=markdown
 au BufRead,BufNewFile *.opml       set ft=xml
 au BufRead,BufNewFile *.mustache   set ft=mustache
 
 au Filetype sh,bash set ts=4 sts=4 sw=4 expandtab
 let g:is_bash = 1
 au Filetype gitcommit set tw=68  spell
-au Filetype ruby      set tw=80  ts=2
+au Filetype ruby      set tw=80  ts=2 sts=2 sw=2
 au Filetype ruby      compiler ruby
 au Filetype xml       set foldmethod=syntax
 let g:xml_syntax_folding = 1
-au FileType pandoc set tw=80 ts=2 sw=2 expandtab
+au FileType markdown set tw=80 ts=2 sw=2 expandtab
 au Filetype javascript setlocal ts=4 sts=4 sw=4
 au FileType javascript setlocal nocindent
 au Filetype perl setlocal ts=4 sts=4 sw=4
+au FileType haskell setlocal ts=4 sts=4 sw=4
+au FileType html set ts=4 sts=4 sw=4 expandtab tw=120
+
+" Indent XML
+if executable('npm')
+    au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+endif
 
 
 " --------------------------------------------------------------------------
