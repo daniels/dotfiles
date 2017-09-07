@@ -1,18 +1,10 @@
-# Oracle paths
-instantclient_64=/opt/oracle/instantclient_11_2_64bit
-instantclient_32=/opt/oracle/instantclient_10_2_32bit
-DYLD_FALLBACK_LIBRARY_PATH=$instantclient_32${DYLD_FALLBACK_LIBRARY_PATH:+:$DYLD_FALLBACK_LIBRARY_PATH}
-DYLD_FALLBACK_LIBRARY_PATH=$instantclient_64${DYLD_FALLBACK_LIBRARY_PATH:+:$DYLD_FALLBACK_LIBRARY_PATH}
-TNS_ADMIN=$HOME/oracle
-PATH=${PATH:+$PATH:}instantclient_64
-PATH=${PATH:+$PATH:}instantclient_32
-
 # Some random java path
 export JSTESTDRIVER_HOME=~/bin/java
 
 # Heroku
 PATH="/usr/local/heroku/bin:$PATH"
 
-export DYLD_FALLBACK_LIBRARY_PATH
-export TNS_ADMIN
+# Ansible from homebrew keg
+PATH="/usr/local/opt/ansible@2.0/bin:$PATH"
+
 export PATH
