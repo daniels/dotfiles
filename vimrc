@@ -41,8 +41,27 @@ Plug 'scrooloose/syntastic'
 
 " -- Editing aids ---
 
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    let ycm_opts = []
+    if executable('cmake')
+      call add(ycm_opts, '--clang-completer')
+    endif
+    if executable('npm')
+      call add(ycm_opts, '--tern-completer')
+    endif
+
+    execute "!./install.py " . join(ycm_opts)
+  endif
+endfunction
+
 " Autocompletion by tab
-Plug 'ervandew/supertab'
+if has('python')
+  Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+else
+  Plug 'ervandew/supertab'
+endif
+
 
 " Align code on characters or regexps
 Plug 'godlygeek/tabular'
