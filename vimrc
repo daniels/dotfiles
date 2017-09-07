@@ -13,6 +13,12 @@ let g:plug_timeout = 300
 " Solarized for Vim
 Plug 'altercation/vim-colors-solarized'
 
+" "Distraction free writing"
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 " --- Syntax and more ---
 Plug 'vim-scripts/applescript.vim'
 Plug 'tpope/vim-git'
@@ -340,6 +346,9 @@ nnoremap <leader>bd! :bp<bar>sp<bar>bn<bar>bd!<CR>
 
 " Autoformat entire file (and return cursor to position)
 map <leader>= gg=G''
+
+" Show the time (useful when in focus mode)
+map <leader>t :!date<CR>
 
 " ----------------------------------------------------------------------------
 "  Auto Commands
