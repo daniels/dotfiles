@@ -457,7 +457,7 @@ au FileType haskell setlocal ts=4 sts=4 sw=4
 au FileType html set ts=4 sts=4 sw=4 expandtab tw=120
 
 " Indent XML
-if executable('npm')
+if executable('xmllint')
     au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 endif
 
