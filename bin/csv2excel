@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# Swedish Excel by default uses ";" as separator for CSV import/export.
+# Importing CSV with the correct separator is much easier. Therefore this script
+# is useful to be able to share CSV data with the average user.
+require 'csv'
+CSV(ARGF) do |csv|
+  CSV($stdout, col_sep: ";") do |output|
+    csv.each do |input|
+      output << input
+    end
+  end
+end
